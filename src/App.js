@@ -1,4 +1,4 @@
-import { Component, useState } from 'react';
+import { Component, useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import './App.css';
 
@@ -63,8 +63,24 @@ import './App.css';
 // }
 
 const Slider = (props) => {
+  // useState hooks
   const [slide, setSlide] = useState(0);
   const [autoplay, setAutoplay] = useState(false);
+
+  function logging() {
+    console.log('logged!');
+  }
+
+  // hook useEffect = componentDidMount + componentDidUpdate +
+  // componentWillUnmount in class components
+  useEffect(() => {
+    console.log('effect');
+    document.title = `Slide: ${slide}`;
+  }, [slide]);
+
+  useEffect(() => {
+    console.log('autoplay');
+  }, [autoplay]);
 
   function changeSlide(i) {
     setSlide((slide) => slide + i);
@@ -108,7 +124,13 @@ const Slider = (props) => {
 };
 
 function App() {
-  return <Slider />;
+  const [slider, setSlider] = useState(true);
+  return (
+    <>
+      <button onClick={() => setSlider(false)}>Click</button>
+      {slider ? <Slider /> : null}
+    </>
+  );
 }
 
 export default App;
