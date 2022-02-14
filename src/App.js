@@ -8,18 +8,31 @@ const Slider = (props) => {
   const [autoplay, setAutoplay] = useState(false);
 
   const getSomeImages = useCallback(() => {
-    console.log('fetching');
     return [
-      'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg',
       'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg',
     ];
   }, []);
+
+  // function logging () {
+  //   console.log('log!');
+  // }
 
   // hook useEffect = componentDidMount + componentDidUpdate +
   // componentWillUnmount in class components
   useEffect(() => {
     document.title = `Slide: ${slide}`;
+    console.log('effect')
+    // window.addEventListener('click', logging);
+
+    // return () => {
+    //   window.removeEventListener('click', logging);
+    // }
+
   }, [slide]);
+
+  useEffect(() => {
+    console.log('autoplay')
+  }, [autoplay])
 
   useEffect(() => {}, [autoplay]);
 
@@ -34,13 +47,13 @@ const Slider = (props) => {
   return (
     <Container>
       <div className="slider w-50 m-auto">
-        {/* {getSomeImages().map((url, i) => {
+        {getSomeImages().map((url, i) => {
           return (
             <img key={i} className="d-block" w-100 src={url} alt="slide" />
           );
-        })} */}
+        })}
 
-        <Slide getSomeImages={getSomeImages} />
+        {/* <Slide getSomeImages={getSomeImages} /> */}
 
         <div className="text-center mt-5">
           Active slide {slide} <br /> {autoplay ? 'auto' : null}
